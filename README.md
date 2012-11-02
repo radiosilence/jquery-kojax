@@ -33,7 +33,7 @@ Seriously. Most of the behaviour is controlled server-side.
 
 You can also call `$.kojax` directly like so:
 
-   $.kojax('/some-url');
+    $.kojax('/some-url');
 
 
 Django
