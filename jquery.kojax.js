@@ -54,7 +54,11 @@ var kojax = function($, History) {
             success: function(data, status, xhr) {
                 var $dom = $(data);
                 cache[context.id] = $dom;
-                callback($dom, context, options);
+                if(xhr.getResponseHeader('Content-Type').match(/application\/x-kojax/)) {
+                    callback($dom, context, options);
+                } else {
+                    window.location = context.url;
+                }
             }
         }
         $.extend(o, options);
