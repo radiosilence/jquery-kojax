@@ -13,9 +13,10 @@ to control a lot more about what happens on the page.
 Instead of just returning HTML, an XHTML document should be returned like so:
 
     <kojax>
+    <title>A Fantastic Page</title>
         <jquery selector="body" function="attr">
             <arg>class</arg>
-            <arg>newpage</arg>
+            <arg>fantastic</arg>
         </jquery>
         <block selector="#main">
             <h1>Oh look, some new content</h1>
