@@ -4,7 +4,10 @@ var kojax = function($, History) {
 }
 
 if (typeof define === 'function' && define.amd) {
-    define(['jquery', 'history', 'history.html4'], kojax);
+    define([ 'jquery'
+           , 'history'
+           , 'history.html4'
+           ], kojax);
 } else if (
     typeof jQuery === 'function'
         && jQuery.fn.jquery
