@@ -20,7 +20,7 @@ var kojax = function($, History) {
         if (options.history) {
             modifyHistory($dom, context, options);
         }
-        
+        $('title').html($dom.find('title').html());
         $dom.find('block').each(function() {
             var $block = $(this);
             $($block.attr('selector')).html($block.html());
