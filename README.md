@@ -25,8 +25,11 @@ Which will be picked up and parsed by jQuery's DOM parser and then translated
 into doing things.
 
 How to use it?
+--------------
 
     $.kojaxBind('nav a');
+
+Seriously. Most of the behaviour is controlled server-side.
 
 Django
 ------
