@@ -5,27 +5,27 @@ var kojax = function($, History) {
     var counter = 0;
     window.cc = cache;
     // Private
-    function modifyHistory($dom, context, options) {
+    function modifyHistory($response, context, options) {
         var state = {
           id: context.id,
           url: context.url,
-          title: $dom.find('title').html(),
+          title: $response.find('title').html(),
           counter: ++counter,
         };
         History.pushState(state, state.title, state.url);
     }
 
     // Private
-    function update($dom, context, options) {
-        if (options.history) {
-            modifyHistory($dom, context, options);
-        }
-        $('title').html($dom.find('title').html());
-        $dom.find('block').each(function() {
+    function processBlocks($response) {
+        $response.find('block').each(function() {
             var $block = $(this);
             $($block.attr('selector')).html($block.html());
         });
-        $dom.find('jquery').each(function() {
+    }
+
+    // Private
+    function processJquery($response) {
+        $response.find('jquery').each(function() {
             var $this = $(this);
             var selector = $this.attr('selector');
             var fn = $this.attr('function');
@@ -34,6 +34,16 @@ var kojax = function($, History) {
             });
             $(selector)[fn](args[0], args[1], args[2], args[3], args[4]);
         });
+    }
+
+    // Private
+    function update($response, context, options) {
+        if (options.history) {
+            modifyHistory($response, context, options);
+        }
+        $('title').html($response.find('title').html());
+        processBlocks($response);
+        processJquery($response);
     }
 
     // Private
@@ -52,10 +62,10 @@ var kojax = function($, History) {
                 xhr.setRequestHeader('Accept', 'application/x-kojax');
             },
             success: function(data, status, xhr) {
-                var $dom = $(data);
-                cache[context.id] = $dom;
+                var $response = $(data);
+                cache[context.id] = $response;
                 if(xhr.getResponseHeader('Content-Type').match(/application\/x-kojax/)) {
-                    callback($dom, context, options);
+                    callback($response, context, options);
                 } else {
                     window.location = context.url;
                 }
@@ -83,11 +93,11 @@ var kojax = function($, History) {
     }
 
     $.kojax = kojax;
-    $.kojaxBind = function(selector, options, bind) {
-        if(!bind) {
-            bind = 'click';
+    $.kojaxBind = function(selector, options, e) {
+        if(!e) {
+            e = 'click';
         }
-        $('body').on(bind, selector, function(event) {
+        $('body').on(e, selector, function(event) {
             var $this = $(this);
             if (!$this.attr('href').match(/^http/)) {
                 event.preventDefault();
@@ -111,7 +121,7 @@ var kojax = function($, History) {
     History.replaceState({id: -1,}, null, window.location);
 }
 
-// Option AMD support.
+// Optional AMD support.
 if (typeof define === 'function' && define.amd) {
     define([ 'jquery'
            , 'history'
