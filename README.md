@@ -31,6 +31,11 @@ How to use it?
 
 Seriously. Most of the behaviour is controlled server-side.
 
+You can also call `$.kojax` directly like so:
+
+   $.kojax('/some-url');
+
+
 Django
 ------
 
