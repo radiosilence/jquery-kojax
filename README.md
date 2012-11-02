@@ -24,6 +24,9 @@ Instead of just returning HTML, an XHTML document should be returned like so:
 Which will be picked up and parsed by jQuery's DOM parser and then translated
 into doing things.
 
+TODO: Reference which blocks do stuff.
+
+
 How to use it?
 --------------
 
@@ -39,5 +42,4 @@ You can also call `$.kojax` directly like so:
 Django
 ------
 
-I will also be creating a re-usable Django app that provides nice tools to
-simply working with kojax.
+I will also be creating a re-usable Django app that provides a nice API.
