@@ -1,6 +1,8 @@
 jquery-kojax
 ============
 
+![](http://i.imgur.com/8Vdz9.jpg)
+
 *Very early in development and subject to change.*
 
 An alternative to PJAX that has the goal of allowing the server-side request
